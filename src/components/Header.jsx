@@ -247,11 +247,8 @@ const Header = () => {
                     )}
                 </div>
 
-                {/*Profile Section */}
-                <div
-                    className="dropdown flex-shrink-0"
-                    ref={profileDropdownRef}
-                >
+                {/* Profile Section */}
+                <div className="relative" ref={profileDropdownRef}>
                     <button
                         className="group relative"
                         onClick={toggleProfileDropdown}
@@ -265,8 +262,8 @@ const Header = () => {
                         </span>
                     </button>
                     {isProfileOpen && (
-                        <ul className="absolute top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90 bg-white rounded-lg shadow-lg">
-                            <li>
+                        <ul className="absolute right-0 mt-2 min-w-max bg-white rounded-lg shadow-lg">
+                            <li className="border-b border-gray-400">
                                 <div className="flex items-center px-4 py-4">
                                     <div className="flex-none">
                                         <img
@@ -276,17 +273,17 @@ const Header = () => {
                                         />
                                     </div>
                                     <div className="truncate ltr:pl-4 rtl:pr-4">
-                                        <h4 className="text-base">
-                                            John Doe
-                                            <span className="rounded bg-success-light px-1 text-xs text-success ltr:ml-2 rtl:ml-2">
-                                                Pro
+                                        <h4 className="text-base whitespace-nowrap">
+                                            Jay-r Olores
+                                            <span className="rounded bg-[#04B800] px-2 py-1 text-xs text-white ltr:ml-2 rtl:ml-2">
+                                                Admin
                                             </span>
                                         </h4>
                                         <a
-                                            className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white"
+                                            className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-[#0066FF] whitespace-nowrap"
                                             href="javascript:;"
                                         >
-                                            johndoe@gmail.com
+                                            jayrmalazarte.olores@gmail.com
                                         </a>
                                     </div>
                                 </div>
@@ -294,31 +291,33 @@ const Header = () => {
                             <li>
                                 <a
                                     href="users-profile.html"
-                                    className="dark:hover:text-white"
+                                    className="flex items-center px-4 py-3 hover:bg-gray-100"
                                     onClick={toggleProfileDropdown}
                                 >
                                     <ProfileIcon />
-                                    Profile
+                                    <span className="ml-2">Profile</span>
                                 </a>
                             </li>
                             <li>
                                 <a
                                     href="subscription.html"
-                                    className="dark:hover:text-white"
+                                    className="flex items-center px-4 py-3 hover:bg-gray-100"
                                     onClick={toggleProfileDropdown}
                                 >
                                     <SubscriptionIcon />
-                                    Subscription
+                                    <span className="ml-2">
+                                        &nbsp;Subscription
+                                    </span>
                                 </a>
                             </li>
-                            <li className="border-t border-white-light dark:border-white-light/10">
+                            <li className="border-t border-gray-400">
                                 <a
                                     href="auth-boxed-signin.html"
-                                    className="!py-3 text-danger"
+                                    className="flex items-center px-4 py-4 text-red-600 hover:bg-gray-100"
                                     onClick={toggleProfileDropdown}
                                 >
-                                    <SignOutIcon />
-                                    Sign Out
+                                    <SignOutIcon className="text-red-600" />
+                                    <span className="ml-2">Sign Out</span>
                                 </a>
                             </li>
                         </ul>
