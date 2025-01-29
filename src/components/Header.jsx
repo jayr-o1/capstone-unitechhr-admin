@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Bell } from "lucide-react";
+import NotificationIcon from "../assets/icons/NotificationIcon";
+import ProfileIcon from "../assets/icons/ProfileIcon";
+import SignOutIcon from "../assets/icons/SignOutIcon";
+import SubscriptionIcon from "../assets/icons/SubscriptionIcon";
 
 const Header = () => {
     const [notifications, setNotifications] = useState([
@@ -8,22 +11,24 @@ const Header = () => {
             profile: "user1.jpg",
             message: "You have a new message",
             time: "2 mins ago",
-            read: false, // Add a `read` flag to track unread notifications
+            read: false,
         },
         {
             id: 2,
             profile: "user2.jpg",
             message: "Your profile has been updated",
             time: "10 mins ago",
-            read: false, // Add a `read` flag to track unread notifications
+            read: false,
         },
     ]);
     const [isOpen, setIsOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const profileDropdownRef = useRef(null);
 
     const toggleDropdown = () => setIsOpen(!isOpen);
+    const toggleProfileDropdown = () => setIsProfileOpen(!isProfileOpen);
 
-    // Mark a notification as read
     const markAsRead = (id) => {
         setNotifications(
             notifications.map((notification) =>
@@ -34,7 +39,6 @@ const Header = () => {
         );
     };
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -43,16 +47,20 @@ const Header = () => {
             ) {
                 setIsOpen(false);
             }
+            if (
+                profileDropdownRef.current &&
+                !profileDropdownRef.current.contains(event.target)
+            ) {
+                setIsProfileOpen(false);
+            }
         };
 
-        if (isOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
-        }
+        document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [isOpen]);
+    }, []);
 
     return (
         <header className="bg-white shadow-md px-4 py-2 flex items-center justify-between bg-black pl-16 pr-16">
@@ -98,8 +106,7 @@ const Header = () => {
                         className="p-2 rounded-full hover:bg-gray-100 focus:outline-none"
                         onClick={toggleDropdown}
                     >
-                        <Bell className="w-6 h-6 text-gray-700" />
-                        {/* Green Ping on Notification Icon */}
+                        <NotificationIcon />
                         {notifications.some((n) => !n.read) && (
                             <span className="absolute top-0 right-1 flex h-3.5 w-3.5">
                                 <span className="absolute inset-0 h-full w-full animate-ping rounded-full bg-green-500/50 opacity-75"></span>
@@ -108,7 +115,6 @@ const Header = () => {
                         )}
                     </button>
 
-                    {/* Notification Dropdown */}
                     {isOpen && (
                         <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg divide-y">
                             <div className="px-4 py-2 font-semibold text-lg flex items-center">
@@ -138,7 +144,6 @@ const Header = () => {
                                                 alt="Profile"
                                                 className="h-12 w-12 rounded-full object-cover"
                                             />
-                                            {/* Green Ping Indicator */}
                                             {!notification.read && (
                                                 <span className="absolute bottom-0 right-0 flex h-3 w-3">
                                                     <span className="absolute -top-[2px] -right-[2px] h-full w-full animate-ping rounded-full bg-green-500/50 opacity-75"></span>
@@ -158,8 +163,14 @@ const Header = () => {
                                             type="button"
                                             className="text-gray-400 hover:text-red-500"
                                             onClick={(e) => {
-                                                e.stopPropagation(); // Prevent the parent div's onClick from firing
-                                                markAsRead(notification.id);
+                                                e.stopPropagation();
+                                                setNotifications(
+                                                    notifications.filter(
+                                                        (n) =>
+                                                            n.id !==
+                                                            notification.id
+                                                    )
+                                                );
                                             }}
                                         >
                                             <svg
@@ -188,8 +199,31 @@ const Header = () => {
                                     </div>
                                 ))
                             ) : (
-                                <div className="p-4 text-center text-gray-500">
-                                    No notifications available.
+                                <div className="!grid min-h-[200px] place-content-center text-lg hover:!bg-transparent">
+                                    <div className="mx-auto mb-4 rounded-full text-[#76B5FE] ring-4 ring-[#76B5FE]/30">
+                                        <svg
+                                            width="40"
+                                            height="40"
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                opacity="0.3"
+                                                d="M20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20C15.5228 20 20 15.5228 20 10Z"
+                                                fill="#76B5FE"
+                                            />
+                                            <path
+                                                d="M10 4.25C10.4142 4.25 10.75 4.58579 10.75 5V11C10.75 11.4142 10.4142 11.75 10 11.75C9.58579 11.75 9.25 11.4142 9.25 11V5C9.25 4.58579 9.58579 4.25 10 4.25Z"
+                                                fill="#76B5FE"
+                                            />
+                                            <path
+                                                d="M10 15C10.5523 15 11 14.5523 11 14C11 13.4477 10.5523 13 10 13C9.44772 13 9 13.4477 9 14C9 14.5523 9.44772 15 10 15Z"
+                                                fill="#76B5FE"
+                                            />
+                                        </svg>
+                                    </div>
+                                    No notification available.
                                 </div>
                             )}
                             {notifications.length > 0 && (
@@ -213,11 +247,83 @@ const Header = () => {
                     )}
                 </div>
 
-                <img
-                    src="/path/to/your-logo.png" // Replace with your profile image path
-                    alt="Profile"
-                    className="w-8 h-8 rounded-full object-cover border border-gray-300"
-                />
+                {/*Profile Section */}
+                <div
+                    className="dropdown flex-shrink-0"
+                    ref={profileDropdownRef}
+                >
+                    <button
+                        className="group relative"
+                        onClick={toggleProfileDropdown}
+                    >
+                        <span>
+                            <img
+                                className="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
+                                src="/assets/images/user-profile.jpeg"
+                                alt="Profile"
+                            />
+                        </span>
+                    </button>
+                    {isProfileOpen && (
+                        <ul className="absolute top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90 bg-white rounded-lg shadow-lg">
+                            <li>
+                                <div className="flex items-center px-4 py-4">
+                                    <div className="flex-none">
+                                        <img
+                                            className="h-10 w-10 rounded-md object-cover"
+                                            src="/assets/images/user-profile.jpeg"
+                                            alt="Profile"
+                                        />
+                                    </div>
+                                    <div className="truncate ltr:pl-4 rtl:pr-4">
+                                        <h4 className="text-base">
+                                            John Doe
+                                            <span className="rounded bg-success-light px-1 text-xs text-success ltr:ml-2 rtl:ml-2">
+                                                Pro
+                                            </span>
+                                        </h4>
+                                        <a
+                                            className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white"
+                                            href="javascript:;"
+                                        >
+                                            johndoe@gmail.com
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a
+                                    href="users-profile.html"
+                                    className="dark:hover:text-white"
+                                    onClick={toggleProfileDropdown}
+                                >
+                                    <ProfileIcon />
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="subscription.html"
+                                    className="dark:hover:text-white"
+                                    onClick={toggleProfileDropdown}
+                                >
+                                    <SubscriptionIcon />
+                                    Subscription
+                                </a>
+                            </li>
+                            <li className="border-t border-white-light dark:border-white-light/10">
+                                <a
+                                    href="auth-boxed-signin.html"
+                                    className="!py-3 text-danger"
+                                    onClick={toggleProfileDropdown}
+                                >
+                                    <SignOutIcon />
+                                    Sign Out
+                                </a>
+                            </li>
+                        </ul>
+                    )}
+                </div>
             </div>
         </header>
     );
