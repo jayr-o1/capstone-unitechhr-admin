@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import CalendarIcon from "../../assets/icons/CalendarIcon";
 import NotificationIcon from "../../assets/icons/NotificationIcon";
 import ProfileIcon from "../../assets/icons/ProfileIcon";
 import SignOutIcon from "../../assets/icons/SignOutIcon";
@@ -68,9 +69,17 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
     }, []);
 
     return (
-        <header className="bg-white shadow-md px-2 py-1.5 flex items-center justify-between bg-black pl-8 pr-4 z-40">
+        <header className="bg-white shadow-sm px-2 py-1.5 flex items-center justify-between bg-black pl-4 pr-4 z-40">
             {/* Logo and Sidebar Toggle */}
-            <div className="flex items-center"></div>
+            <div className="flex items-center">
+                {/* Calendar Icon */}
+                <a
+                    href="apps-calendar.html"
+                    className="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
+                >
+                    <CalendarIcon />
+                </a>
+            </div>
 
             {/* Notification and Profile */}
             <div className="flex items-center space-x-4">
