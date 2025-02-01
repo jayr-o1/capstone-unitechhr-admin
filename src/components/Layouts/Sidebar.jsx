@@ -25,7 +25,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
             label: "Dashboard",
             icon: (
                 <svg
-                    className="shrink-0 group-hover:text-blue-500 text-gray-500 transition-colors duration-300"
+                    className={`shrink-0 ${
+                        activeLink === "dashboard" ||
+                        activeDropdown === "dashboard"
+                            ? "text-blue-500"
+                            : "text-gray-500"
+                    } group-hover:text-blue-500 transition-colors duration-300`}
                     width="20"
                     height="20"
                     viewBox="0 0 24 24"
@@ -49,7 +54,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
             label: "Universities",
             icon: (
                 <svg
-                    className="shrink-0 group-hover:text-blue-500 text-gray-500 transition-colors duration-300"
+                    className={`shrink-0 ${
+                        activeLink === "universities" ||
+                        activeDropdown === "universities"
+                            ? "text-blue-500"
+                            : "text-gray-500"
+                    } group-hover:text-blue-500 transition-colors duration-300`}
                     width="20"
                     height="20"
                     viewBox="0 0 24 24"
@@ -170,9 +180,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                             <button
                                 type="button"
                                 className={`nav-link w-full flex items-center justify-between p-3 transition-all duration-300 relative z-10 ${
-                                    activeLink === item.id
-                                        ? "bg-gray-100 rounded-lg"
-                                        : ""
+                                    activeLink === item.id ? "" : ""
                                 }`}
                                 onClick={(e) => {
                                     e.stopPropagation();
@@ -182,7 +190,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                             >
                                 {/* Pseudo-element for border background */}
                                 <div
-                                    className="absolute inset-y-0 left-2 right-2 bg-gray-100 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-lg -z-10 cursor-pointer"
+                                    className={`absolute inset-y-0 left-2 right-2 bg-gray-100 opacity-0 ${
+                                        activeLink === item.id ||
+                                        activeDropdown === item.id
+                                            ? "opacity-100"
+                                            : "group-hover:opacity-100"
+                                    } transition-opacity duration-300 rounded-lg -z-10 cursor-pointer`}
                                     aria-hidden="true"
                                 ></div>
 

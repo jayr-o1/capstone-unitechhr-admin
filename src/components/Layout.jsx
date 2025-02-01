@@ -18,7 +18,11 @@ const Layout = ({ children }) => {
             />
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col overflow-hidden">
+            <div
+                className={`flex-1 flex flex-col overflow-hidden transition-all duration-300 ${
+                    isSidebarOpen ? "ml-64" : "ml-16"
+                }`}
+            >
                 {/* Header */}
                 <Header
                     isSidebarOpen={isSidebarOpen}
