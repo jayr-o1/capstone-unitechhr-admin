@@ -75,7 +75,7 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
                 {/* Calendar Icon */}
                 <a
                     href="apps-calendar.html"
-                    className="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
+                    className="p-2 rounded-full bg-gray-100 focus:outline-none cursor-pointer"
                 >
                     <CalendarIcon />
                 </a>
@@ -86,12 +86,12 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
                 <div className="relative" ref={dropdownRef}>
                     <button
                         type="button"
-                        className="p-2 rounded-full hover:bg-gray-100 focus:outline-none cursor-pointer"
+                        className="p-2 rounded-full bg-gray-100 focus:outline-none cursor-pointer"
                         onClick={toggleDropdown}
                     >
                         <NotificationIcon />
                         {notifications.some((n) => !n.read) && (
-                            <span className="absolute top-0 right-1 flex h-3.5 w-3.5">
+                            <span className="absolute left-5 top-0 right-0 flex h-3.5 w-3.5">
                                 <span className="absolute inset-0 h-full w-full animate-ping rounded-full bg-green-500/50 opacity-75"></span>
                                 <span className="relative m-1 top-0 right-0 h-1.5 w-1.5 rounded-full bg-green-500"></span>
                             </span>
@@ -128,9 +128,8 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
                                                 className="h-12 w-12 rounded-full object-cover"
                                             />
                                             {!notification.read && (
-                                                <span className="absolute bottom-0 right-0 flex h-3 w-3">
-                                                    <span className="absolute -top-[2px] -right-[2px] h-full w-full animate-ping rounded-full bg-green-500/50 opacity-75"></span>
-                                                    <span className="relative left-1 h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                                                <span className="absolute left-8.5 right-0 bottom-0 top-10 flex h-4 w-4">
+                                                    <span className="relative h-2 w-2 rounded-full bg-green-500"></span>
                                                 </span>
                                             )}
                                         </div>
@@ -192,12 +191,12 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
                 {/* Profile Section */}
                 <div className="relative" ref={profileDropdownRef}>
                     <button
-                        className="group relative"
+                        className="group relative flex items-center justify-center"
                         onClick={toggleProfileDropdown}
                     >
                         <span>
                             <img
-                                className="h-9 w-9 rounded-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                                className="flex h-9 w-9 rounded-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                                 src={profileImage}
                                 alt="Profile"
                             />
