@@ -1,6 +1,5 @@
 const ProfileIcon = () => (
     <svg
-        className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2"
         width="18"
         height="18"
         viewBox="0 0 24 24"

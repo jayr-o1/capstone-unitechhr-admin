@@ -1,6 +1,5 @@
 const NotificationIcon = () => (
     <svg
-        className="w-6 h-6 text-gray-700"
         width="20"
         height="20"
         viewBox="0 0 24 24"
