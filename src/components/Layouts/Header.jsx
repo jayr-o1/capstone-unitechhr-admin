@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import CalendarIcon from "../../assets/icons/CalendarIcon";
-import NotificationIcon from "../../assets/icons/NotificationIcon";
-import ProfileIcon from "../../assets/icons/ProfileIcon";
-import SignOutIcon from "../../assets/icons/SignOutIcon";
-import SubscriptionIcon from "../../assets/icons/SubscriptionIcon";
-import NotificationAlertIcon from "../../assets/icons/NotificationAlertIcon";
-import NotificationCloseIcon from "../../assets/icons/NotificationCloseIcon";
+import CalendarIcon from "../../assets/icons/HeaderIcons/CalendarIcon";
+import NotificationIcon from "../../assets/icons/HeaderIcons/NotificationIcon";
+import ProfileIcon from "../../assets/icons/HeaderIcons/ProfileIcon";
+import SignOutIcon from "../../assets/icons/HeaderIcons/SignOutIcon";
+import SubscriptionIcon from "../../assets/icons/HeaderIcons/SubscriptionIcon";
+import NotificationAlertIcon from "../../assets/icons/HeaderIcons/NotificationAlertIcon";
+import NotificationCloseIcon from "../../assets/icons/HeaderIcons/NotificationCloseIcon";
 
 import profileImage from "../../assets/images/profile-1.jpeg";
 
