@@ -231,6 +231,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                             className="menu nav-item group relative"
                         >
                             <Link
+                                to={item.path}
                                 className={`nav-link w-full flex items-center justify-between p-3 transition-all duration-300 relative z-10 ${
                                     activeLink === item.id ? "" : ""
                                 }`}
