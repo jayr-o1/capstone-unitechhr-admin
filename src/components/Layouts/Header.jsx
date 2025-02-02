@@ -10,7 +10,7 @@ import NotificationCloseIcon from "../../assets/icons/HeaderIcons/NotificationCl
 
 import profileImage from "../../assets/images/profile-1.jpeg";
 
-const Header = ({ isSidebarOpen, toggleSidebar }) => {
+const Header = () => {
     const [notifications, setNotifications] = useState([
         {
             id: 1,
