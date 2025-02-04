@@ -243,7 +243,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                             >
                                 {/* Pseudo-element for border background */}
                                 <div
-                                    className={`absolute inset-y-0 left-2 right-2 bg-gray-100 opacity-0 ${
+                                    className={`absolute inset-y-0 left-2 right-2 bg-gray-200 opacity-0 ${
                                         activeLink === item.id ||
                                         activeDropdown === item.id
                                             ? "opacity-100"
