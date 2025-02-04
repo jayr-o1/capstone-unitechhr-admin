@@ -80,7 +80,7 @@ const Calendar = () => {
     }, []);
 
     return (
-        <div className="w-full h-screen p-6 bg-white rounded-xl shadow-lg transition-all duration-300 flex flex-col">
+        <div className="w-full h-full p-6 bg-white rounded-xl shadow-lg transition-all duration-300 flex flex-col">
             {/* Header Section */}
             <div className="mb-5">
                 <h2 className="text-lg font-semibold">Calendar</h2>
@@ -105,7 +105,7 @@ const Calendar = () => {
             </div>
 
             {/* Calendar Component */}
-            <div className="flex-grow overflow-hidden">
+            <div className="flex-grow">
                 <FullCalendar
                     ref={calendarRef}
                     plugins={[dayGridPlugin]}

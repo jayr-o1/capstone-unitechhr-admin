@@ -32,7 +32,7 @@ const Layout = () => {
 
                 {/* Main Content */}
                 <div
-                    className={`flex-1 flex flex-col overflow-hidden transition-all duration-300 ${
+                    className={`flex-1 flex flex-col transition-all duration-300 ${
                         isSidebarOpen ? "ml-64" : "ml-16"
                     }`}
                 >
@@ -42,7 +42,8 @@ const Layout = () => {
                         toggleSidebar={toggleSidebar}
                     />
 
-                    <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 bg-gray-100">
+                    {/* Scrollable Main Content */}
+                    <main className="flex-1 overflow-y-auto p-4 bg-gray-100">
                         <Outlet context={{ isSidebarOpen }} />
                     </main>
                 </div>
