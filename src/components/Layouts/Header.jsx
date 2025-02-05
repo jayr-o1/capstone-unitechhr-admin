@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import CalendarIcon from "../../assets/icons/HeaderIcons/CalendarIcon";
 import NotificationIcon from "../../assets/icons/HeaderIcons/NotificationIcon";
 import ProfileIcon from "../../assets/icons/HeaderIcons/ProfileIcon";
@@ -7,7 +6,6 @@ import SignOutIcon from "../../assets/icons/HeaderIcons/SignOutIcon";
 import SubscriptionIcon from "../../assets/icons/HeaderIcons/SubscriptionIcon";
 import NotificationAlertIcon from "../../assets/icons/HeaderIcons/NotificationAlertIcon";
 import NotificationCloseIcon from "../../assets/icons/HeaderIcons/NotificationCloseIcon";
-
 import profileImage from "../../assets/images/profile-1.jpeg";
 
 const Header = () => {
@@ -69,7 +67,7 @@ const Header = () => {
     }, []);
 
     return (
-        <header className="bg-white shadow-sm px-2 py-1.5 flex items-center justify-between bg-black pl-4 pr-4 z-40">
+        <header className="sticky top-0 bg-white shadow-sm px-2 py-1.5 flex items-center justify-between bg-black pl-4 pr-4 z-40 h-16">
             {/* Logo and Sidebar Toggle */}
             <div className="flex items-center">
                 {/* Calendar Icon */}
