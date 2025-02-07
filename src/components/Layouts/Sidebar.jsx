@@ -34,6 +34,18 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                 />
             ),
             path: "/dashboard", // Add path
+            subItems: [
+                {
+                    id: "sales",
+                    label: "Sales",
+                    path: "/dashboard/sales", // Add path for Sales
+                },
+                {
+                    id: "analytics",
+                    label: "Analytics",
+                    path: "/dashboard/analytics", // Add path for Analytics
+                },
+            ],
         },
         {
             id: "universities",
@@ -198,8 +210,8 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                             className={`m-auto h-5 w-5 transition-transform duration-300 ${
                                 isSidebarOpen ? "rotate-180" : ""
                             }`}
-                            width="20"
-                            height="20"
+                            width="24"
+                            height="24"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
