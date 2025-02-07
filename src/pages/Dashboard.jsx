@@ -84,34 +84,52 @@ const Dashboard = () => {
             {/* Charts Section */}
             <div
                 ref={containerRef}
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                className="grid grid-cols-1 md:grid-cols-[70%_30%] gap-6 pr-6" // Added px-4 for uniform margins
             >
                 {/* Revenue Chart */}
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-semibold text-gray-700">
-                        Revenue
-                    </h3>
-                    <p className="text-gray-600">
+                    {/* Header & Legend in One Row */}
+                    <div className="flex justify-between items-center mb-2">
+                        <h3 className="text-lg font-semibold text-gray-700">
+                            Revenue
+                        </h3>
+                        <div className="flex space-x-4">
+                            <span className="flex items-center text-blue-600 font-medium">
+                                <span className="w-3 h-3 bg-blue-600 rounded-full mr-1"></span>{" "}
+                                Income
+                            </span>
+                            <span className="flex items-center text-red-600 font-medium">
+                                <span className="w-3 h-3 bg-red-600 rounded-full mr-1"></span>{" "}
+                                Expenses
+                            </span>
+                        </div>
+                    </div>
+
+                    <p className="text-gray-600 mb-10">
                         Total Profit{" "}
                         <span className="text-blue-600">$10,840</span>
                     </p>
+
                     <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={lineData}>
                             <XAxis dataKey="name" />
-                            <YAxis />
+                            <YAxis
+                                tickFormatter={(value) => `${value / 1000}k`}
+                            />
                             <Tooltip />
-                            <Legend />
                             <Line
                                 type="monotone"
                                 dataKey="income"
                                 stroke="#0000FF"
-                                dot={{ r: 5 }}
+                                dot={{ r: 6, fill: "#0000FF" }}
+                                strokeWidth={2}
                             />
                             <Line
                                 type="monotone"
                                 dataKey="expenses"
                                 stroke="#FF0000"
-                                dot={{ r: 5 }}
+                                dot={{ r: 6, fill: "#FF0000" }}
+                                strokeWidth={2}
                             />
                         </LineChart>
                     </ResponsiveContainer>

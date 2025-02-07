@@ -34,6 +34,18 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                 />
             ),
             path: "/dashboard", // Add path
+            subItems: [
+                {
+                    id: "sales",
+                    label: "Sales",
+                    path: "/dashboard/sales", // Add path for Sales
+                },
+                {
+                    id: "analytics",
+                    label: "Analytics",
+                    path: "/dashboard/analytics", // Add path for Analytics
+                },
+            ],
         },
         {
             id: "universities",
