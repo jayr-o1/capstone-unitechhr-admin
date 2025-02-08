@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useOutletContext } from "react-router-dom"; // Import useOutletContext
+import { useOutletContext } from "react-router-dom";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction"; // Import interactionPlugin
 import CalendarModal from "../components/Modals/CalendarModal";
-import CalendarEventForm from "../components/EventForms/EventForm";
+import CalendarEventForm from "../components/EventForms/CalendarEventForm";
 
 const Calendar = () => {
-    const { isSidebarOpen } = useOutletContext(); // Access isSidebarOpen from Outlet context
-
+    const { isSidebarOpen } = useOutletContext();
     const calendarRef = useRef(null);
     const [events, setEvents] = useState([
         { id: 1, title: "Meeting", start: "2025-02-02", type: "work" },
@@ -16,13 +16,21 @@ const Calendar = () => {
     const [eventDetails, setEventDetails] = useState({
         title: "",
         start: "",
+        end: "",
         description: "",
         type: "work",
     });
 
     const handleDateClick = (arg) => {
-        setEventDetails({ ...eventDetails, start: arg.dateStr });
-        setIsModalOpen(true);
+        console.log("Date clicked:", arg.dateStr); // Debugging line
+        const clickedDate = arg.date;
+        setEventDetails({
+            ...eventDetails,
+            start: clickedDate.toISOString().slice(0, 16), // Format for datetime-local input
+            end: clickedDate.toISOString().slice(0, 16), // Default end time same as start
+        });
+        setIsModalOpen(true); // Open the modal
+        console.log("Modal state:", isModalOpen); // Debugging line
     };
 
     const handleEventSubmit = (e) => {
@@ -37,6 +45,7 @@ const Calendar = () => {
         setEventDetails({
             title: "",
             start: "",
+            end: "",
             description: "",
             type: "work",
         });
@@ -57,25 +66,27 @@ const Calendar = () => {
         }
     };
 
-    // 🔄 Resize Calendar Dynamically
-    const resizeCalendar = () => {
-        if (calendarRef.current) {
-            const calendarApi = calendarRef.current.getApi();
-            calendarApi.updateSize();
-        }
-    };
-
     // Resize calendar when sidebar state changes
     useEffect(() => {
-        const timer = setTimeout(resizeCalendar, 300); // 🛠 Delay ensures smooth resize
+        const timer = setTimeout(() => {
+            if (calendarRef.current) {
+                const calendarApi = calendarRef.current.getApi();
+                calendarApi.updateSize();
+            }
+        }, 300);
         return () => clearTimeout(timer);
     }, [isSidebarOpen]);
 
     // Resize calendar on window resize
     useEffect(() => {
-        window.addEventListener("resize", resizeCalendar);
+        window.addEventListener("resize", () => {
+            if (calendarRef.current) {
+                const calendarApi = calendarRef.current.getApi();
+                calendarApi.updateSize();
+            }
+        });
         return () => {
-            window.removeEventListener("resize", resizeCalendar);
+            window.removeEventListener("resize", () => {});
         };
     }, []);
 
@@ -108,10 +119,10 @@ const Calendar = () => {
             <div className="flex-grow">
                 <FullCalendar
                     ref={calendarRef}
-                    plugins={[dayGridPlugin]}
+                    plugins={[dayGridPlugin, interactionPlugin]} // Add interactionPlugin here
                     initialView="dayGridMonth"
                     events={events}
-                    dateClick={handleDateClick}
+                    dateClick={handleDateClick} // This will now work
                     headerToolbar={{
                         left: "prev next today",
                         center: "title",
@@ -133,8 +144,7 @@ const Calendar = () => {
                     eventContent={(eventInfo) => (
                         <div
                             style={{
-                                backgroundColor:
-                                    eventInfo.event.backgroundColor,
+                                backgroundColor: eventInfo.event.backgroundColor,
                                 padding: "2px 5px",
                                 borderRadius: "4px",
                                 color: "white",
@@ -156,6 +166,7 @@ const Calendar = () => {
                     onSubmit={handleEventSubmit}
                     eventDetails={eventDetails}
                     setEventDetails={setEventDetails}
+                    onClose={() => setIsModalOpen(false)} // Pass onClose to form
                 />
             </CalendarModal>
         </div>

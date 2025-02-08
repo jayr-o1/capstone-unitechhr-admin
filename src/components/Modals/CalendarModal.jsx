@@ -1,6 +1,7 @@
 import React from "react";
 
 const CalendarModal = ({ isOpen, onClose, children }) => {
+    console.log("Modal isOpen:", isOpen); // Debugging line
     if (!isOpen) return null;
 
     return (
