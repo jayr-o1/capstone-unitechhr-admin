@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
-const CalendarEventForm = ({ onSubmit, eventDetails, setEventDetails }) => {
+const CalendarEventForm = ({
+    onSubmit,
+    eventDetails,
+    setEventDetails,
+    onClose, // Add onClose prop
+}) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setEventDetails({ ...eventDetails, [name]: value });
@@ -68,8 +73,8 @@ const CalendarEventForm = ({ onSubmit, eventDetails, setEventDetails }) => {
                         <input
                             type="radio"
                             name="type"
-                            value="primary"
-                            checked={eventDetails.type === "primary"}
+                            value="work"
+                            checked={eventDetails.type === "work"}
                             onChange={handleChange}
                             className="form-radio text-indigo-600"
                         />
@@ -79,8 +84,8 @@ const CalendarEventForm = ({ onSubmit, eventDetails, setEventDetails }) => {
                         <input
                             type="radio"
                             name="type"
-                            value="info"
-                            checked={eventDetails.type === "info"}
+                            value="travel"
+                            checked={eventDetails.type === "travel"}
                             onChange={handleChange}
                             className="form-radio text-blue-600"
                         />
@@ -90,8 +95,8 @@ const CalendarEventForm = ({ onSubmit, eventDetails, setEventDetails }) => {
                         <input
                             type="radio"
                             name="type"
-                            value="success"
-                            checked={eventDetails.type === "success"}
+                            value="personal"
+                            checked={eventDetails.type === "personal"}
                             onChange={handleChange}
                             className="form-radio text-green-600"
                         />
@@ -101,8 +106,8 @@ const CalendarEventForm = ({ onSubmit, eventDetails, setEventDetails }) => {
                         <input
                             type="radio"
                             name="type"
-                            value="danger"
-                            checked={eventDetails.type === "danger"}
+                            value="important"
+                            checked={eventDetails.type === "important"}
                             onChange={handleChange}
                             className="form-radio text-red-600"
                         />
