@@ -3,8 +3,8 @@ import { useOutletContext } from "react-router-dom";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // Import interactionPlugin
-import CalendarModal from "../components/Modals/CalendarModal";
-import CalendarEventForm from "../components/EventForms/CalendarEventForm";
+import CalendarModal from "../components/Calendar/Modals/CalendarModal";
+import CalendarEventForm from "../components/Calendar/EventForms/CalendarEventForm";
 
 const Calendar = () => {
     const { isSidebarOpen } = useOutletContext();
@@ -144,7 +144,8 @@ const Calendar = () => {
                     eventContent={(eventInfo) => (
                         <div
                             style={{
-                                backgroundColor: eventInfo.event.backgroundColor,
+                                backgroundColor:
+                                    eventInfo.event.backgroundColor,
                                 padding: "2px 5px",
                                 borderRadius: "4px",
                                 color: "white",
