@@ -194,7 +194,7 @@ const Header = () => {
                     >
                         <span>
                             <img
-                                className="flex h-9 w-9 rounded-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                                className="flex h-10 w-10 rounded-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                                 src={profileImage}
                                 alt="Profile"
                             />

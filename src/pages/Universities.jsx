@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Universities = () => {
+    const [universities, setUniversities] = useState([]);
+
+    // Fetch universities from your API
+    useEffect(() => {
+        const fetchUniversities = async () => {
+            try {
+                const response = await fetch("/api/universities"); // Replace with your API endpoint
+                if (!response.ok) {
+                    throw new Error("Failed to fetch universities");
+                }
+                const data = await response.json();
+                setUniversities(data);
+            } catch (error) {
+                console.error("Error fetching universities:", error);
+            }
+        };
+
+        fetchUniversities();
+    }, []);
+
     return (
         <div className="p-4">
             {/* Header with Add University Button */}
@@ -23,17 +43,29 @@ const Universities = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Example Data Row */}
-                        <tr className="hover:bg-gray-50">
-                            <td className="py-2 px-4 border-b">Harvard University</td>
-                            <td className="py-2 px-4 border-b">Cambridge, MA</td>
-                            <td className="py-2 px-4 border-b">1636</td>
-                            <td className="py-2 px-4 border-b">
-                                <button className="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
-                                <button className="text-red-500 hover:text-red-700">Delete</button>
-                            </td>
-                        </tr>
-                        {/* Add more rows as needed */}
+                        {universities.length > 0 ? (
+                            universities.map((university) => (
+                                <tr key={university.id} className="hover:bg-gray-50">
+                                    <td className="py-2 px-4 border-b">{university.name}</td>
+                                    <td className="py-2 px-4 border-b">{university.location}</td>
+                                    <td className="py-2 px-4 border-b">{university.established}</td>
+                                    <td className="py-2 px-4 border-b">
+                                        <button className="text-blue-500 hover:text-blue-700 mr-2">
+                                            Edit
+                                        </button>
+                                        <button className="text-red-500 hover:text-red-700">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="4" className="py-2 px-4 border-b text-center">
+                                    No universities found.
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
